@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .scoreboard {
+    flex: 1;
+    align-self: flex-start;
+    margin: 2%;
+  }
+
+  .main {
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    margin-right: 2%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+}
