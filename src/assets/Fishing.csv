@@ -1,0 +1,7 @@
+﻿Name,Keeper,Fish,Kept,Released,Image
+King George Whiting,Y,Y,50,70,King-George.png
+Lost Bait,N,N,-10,0,Lost-Bait.png
+Small Mulloway,N,Y,-10,10,Small-Mulloway.png
+Snapper,Y,Y,30,40,Snapper.png
+Large Mullet,Y,Y,20,20,Large-Mullet.png
+Seaweed Monster,Y,N,5,-5,Seaweed.png
