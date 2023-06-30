@@ -1,4 +1,16 @@
 .game-card {
   background-color: #fdc175;
   border: #9e460c 7px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  text-align: center;
+}
+
+#cast-btn {
+  background-color: transparent;
+  border: transparent;
 }

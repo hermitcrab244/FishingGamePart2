@@ -2,15 +2,29 @@
   <mat-card-header>
     <h1>Fishing Game</h1>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="content">
     <div>
-      <p>Click the rod to cast!</p>
-      <button mat-raised-button (click)="playCast()">Cast</button>
+      <p>{{ fishMsg }}</p>
+      <button id="cast-btn" (click)="playCast()" [disabled]="castDisabled">
+        <img src="{{ fishImg }}" alt="Cast" height="80" width="80" />
+      </button>
     </div>
-    <div>
-      <p>Would you like to release or keep the fish?</p>
-      <button mat-raised-button (click)="keepRelease(keep)">Keep</button>
-      <button mat-raised-button (click)="keepRelease(release)">Release</button>
+    <div *ngIf="showChoice">
+      <p>{{ choiceMsg }}</p>
+      <button
+        mat-raised-button
+        (click)="keepRelease(keep)"
+        [disabled]="selectDisabled"
+      >
+        Keep
+      </button>
+      <button
+        mat-raised-button
+        (click)="keepRelease(release)"
+        [disabled]="selectDisabled"
+      >
+        Release
+      </button>
     </div>
   </mat-card-content>
 </mat-card>

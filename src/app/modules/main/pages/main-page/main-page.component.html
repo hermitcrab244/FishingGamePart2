@@ -1,8 +1,14 @@
 <div class="container">
   <div class="scoreboard">
-    <app-scoreboard></app-scoreboard>
+    <app-scoreboard
+      [score]="this.score"
+      [fish]="this.fish"
+      [choice]="this.choice"
+    ></app-scoreboard>
   </div>
   <div class="main">
-    <app-game></app-game>
+    <app-game
+      (roundResults)="sendResults($event.score, $event.fish, $event.choice)"
+    ></app-game>
   </div>
 </div>

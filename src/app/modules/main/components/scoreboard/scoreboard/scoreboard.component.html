@@ -2,10 +2,10 @@
   <mat-card-header><h1>Scoreboard</h1></mat-card-header>
   <mat-card-content>
     <div>
-      <p>Player:</p>
-      <p>Score:</p>
-      <p>Total Casts:</p>
-      <p>Previous Catch:</p>
+      <p>Player: {{ playerName }}</p>
+      <p>Score: {{ totalScore }}</p>
+      <p>Total Casts: {{ totalCasts }}</p>
+      <p>Previous Catch: {{ lastCatch }}</p>
       <p>Kept Fish (Click bucket to view):</p>
       <button id="btn-bucket" (click)="bucketClick()">
         <img src="../../../../../../assets/images/Empty-Bucket.png" />
