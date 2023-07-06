@@ -1,4 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { BucketComponent } from '../../bucket/bucket.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-scoreboard',
@@ -6,6 +8,8 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
   styleUrls: ['./scoreboard.component.scss'],
 })
 export class ScoreboardComponent implements OnChanges, OnInit {
+  BucketDialogRef!: MatDialogRef<BucketComponent>;
+
   @Input() score: number = 0;
   @Input() fish: string = '';
   @Input() choice: string = '';
@@ -15,6 +19,8 @@ export class ScoreboardComponent implements OnChanges, OnInit {
   totalCasts: number = 0;
   lastCatch = '';
   keptFish: string[] = [];
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.totalCasts = 0;
@@ -32,6 +38,11 @@ export class ScoreboardComponent implements OnChanges, OnInit {
   }
 
   bucketClick() {
-    console.log('Button works!');
+    this.BucketDialogRef = this.dialog.open(BucketComponent, {
+      width: '20%',
+      data: {
+        keptFishArray: this.keptFish,
+      },
+    });
   }
 }
