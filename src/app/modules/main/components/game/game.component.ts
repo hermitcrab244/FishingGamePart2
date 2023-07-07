@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -22,7 +23,7 @@ export class GameComponent implements OnInit {
   castCount = 0;
   fish = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //CSV reader method is called upon page load
   ngOnInit() {
@@ -55,7 +56,7 @@ export class GameComponent implements OnInit {
     this.playerChoice = choice;
     this.score = this.fishArray[this.randomNumber][this.playerChoice];
     this.fish = this.fishArray[this.randomNumber].name;
-    this.choiceMsg = `You scored ${this.score}`;
+    this.choiceMsg = `You scored: ${this.score}`;
     this.selectDisabled = true;
 
     setTimeout(() => {
@@ -101,5 +102,9 @@ export class GameComponent implements OnInit {
           };
         });
       });
+  }
+
+  close() {
+    this.router.navigate(['/end-page']);
   }
 }

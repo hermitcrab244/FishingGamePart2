@@ -1,0 +1,63 @@
+.card-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.end-card {
+  background-color: #fdc175;
+  border: #9e460c 7px solid;
+  width: 70%;
+  height: 85%;
+  align-items: center;
+  text-align: center;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list-group {
+  flex-basis: 45%;
+  margin-right: 20px;
+}
+
+.list-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-items li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.list-items li img {
+  margin-right: 10px;
+  max-height: 35px;
+}
+
+.list-items li p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.play-again {
+  margin: 5%;
+}
+
+.play-againBtn {
+  margin: 2%;
+
+  button {
+    margin: 1%;
+    background-color: transparent;
+    border: transparent;
+  }
+}

@@ -39,7 +39,7 @@ export class ScoreboardComponent implements OnChanges, OnInit {
 
   bucketClick() {
     this.BucketDialogRef = this.dialog.open(BucketComponent, {
-      width: '20%',
+      width: '40%',
       data: {
         keptFishArray: this.keptFish,
       },

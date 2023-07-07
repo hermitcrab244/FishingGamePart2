@@ -1,6 +1,18 @@
 <mat-card class="game-card">
+  <div id="closeBtnContainer">
+    <button id="closeBtn" (click)="close()" matTooltip="End Game">
+      <img
+        src="../../../../../assets/images/Close.png"
+        alt="close"
+        height="40"
+        width="40"
+      />
+    </button>
+  </div>
   <mat-card-header>
-    <h1>Fishing Game</h1>
+    <div>
+      <h1>Fishing Game</h1>
+    </div>
   </mat-card-header>
   <mat-card-content class="content">
     <div>
@@ -9,21 +21,21 @@
         <img src="{{ fishImg }}" alt="Cast" height="80" width="80" />
       </button>
     </div>
-    <div *ngIf="showChoice">
+    <div *ngIf="showChoice" class="choiceBtn">
       <p>{{ choiceMsg }}</p>
-      <button
-        mat-raised-button
-        (click)="keepRelease(keep)"
-        [disabled]="selectDisabled"
-      >
-        Keep
+      <button (click)="keepRelease(keep)" [disabled]="selectDisabled">
+        <img
+          src="../../../../../assets/images/Wood-Sign-Keep.png"
+          height="60"
+          width="150"
+        />
       </button>
-      <button
-        mat-raised-button
-        (click)="keepRelease(release)"
-        [disabled]="selectDisabled"
-      >
-        Release
+      <button (click)="keepRelease(release)" [disabled]="selectDisabled">
+        <img
+          src="../../../../../assets/images/Wood-Sign-Release.png"
+          height="60"
+          width="150"
+        />
       </button>
     </div>
   </mat-card-content>
