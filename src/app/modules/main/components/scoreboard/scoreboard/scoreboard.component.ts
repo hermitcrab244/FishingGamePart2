@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { BucketComponent } from '../../bucket/bucket.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { GamedataService } from 'src/app/core/services/gameservice/gamedata.service';
 
 @Component({
   selector: 'app-scoreboard',
@@ -14,13 +15,13 @@ export class ScoreboardComponent implements OnChanges, OnInit {
   @Input() fish: string = '';
   @Input() choice: string = '';
 
-  playerName = 'Test';
+  playerName = 'Trainee';
   totalScore: number = 0;
   totalCasts: number = 0;
   lastCatch = '';
   keptFish: string[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private gameService: GamedataService) {}
 
   ngOnInit(): void {
     this.totalCasts = 0;
@@ -35,6 +36,13 @@ export class ScoreboardComponent implements OnChanges, OnInit {
     if (this.choice === 'kept') {
       this.keptFish.push(this.fish);
     }
+
+    this.gameService.setGameData({
+      playerName: this.playerName,
+      totalScore: this.totalScore,
+      totalCasts: this.totalCasts,
+      keptFish: this.keptFish,
+    });
   }
 
   bucketClick() {
