@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { GamedataService } from './core/services/gameservice/gamedata.service';
 import { LoginModule } from './modules/login/login.module';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +22,8 @@ import { LoginModule } from './modules/login/login.module';
     HttpClientModule,
     EndModule,
     LoginModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
