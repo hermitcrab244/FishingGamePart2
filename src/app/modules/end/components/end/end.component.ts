@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GamedataService } from 'src/app/core/services/gameservice/gamedata.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-end',
@@ -19,7 +20,7 @@ export class EndComponent implements OnInit {
   SmallMulloway = 0;
   Snapper = 0;
 
-  constructor(private gameService: GamedataService) {}
+  constructor(private gameService: GamedataService, private router: Router) {}
 
   ngOnInit() {
     this.gameService.retrieveGameData().subscribe((data) => {
@@ -59,5 +60,13 @@ export class EndComponent implements OnInit {
           break;
       }
     });
+  }
+
+  playAgain() {
+    this.router.navigate(['/main-page']);
+  }
+
+  endGame() {
+    this.router.navigate(['/login-page']);
   }
 }

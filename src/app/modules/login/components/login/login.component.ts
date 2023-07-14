@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { RegistrationComponent } from '../registration/registration.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,29 @@ import { RegistrationComponent } from '../registration/registration.component';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  hide = true;
+  form: FormGroup;
+  username!: string;
+  password!: string;
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ) {
+    this.form = formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
   login() {
-    this.router.navigate(['/main-page']);
+    if (this.form.valid) {
+      this.router.navigate(['/main-page']);
+    }
   }
 
   openRegister() {
-    this.dialog.open(RegistrationComponent);
+    this.dialog.open(RegistrationComponent, { width: '25%' });
   }
 }
