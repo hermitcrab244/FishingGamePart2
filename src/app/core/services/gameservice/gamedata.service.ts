@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class GamedataService {
+  playerName: string = '';
+
   constructor() {}
 
   private gameDataSubject = new BehaviorSubject<any>(null);

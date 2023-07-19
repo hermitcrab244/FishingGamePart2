@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BackendService } from 'src/app/core/services/backendService/backend.service';
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +17,8 @@ export class RegistrationComponent {
 
   constructor(
     public RegDialogRef: MatDialogRef<RegistrationComponent>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private backendService: BackendService
   ) {
     this.form = formBuilder.group({
       username: ['', Validators.required],
@@ -31,8 +33,20 @@ export class RegistrationComponent {
       this.form.controls['password'].value ===
         this.form.controls['confirmPassword'].value
     ) {
-      console.log(this.form.value);
-      this.RegDialogRef.close(this.form);
+      const username = this.form.controls['username'].value;
+      const password = this.form.controls['password'].value;
+
+      // Call method from service
+      this.backendService.registerUser(username, password).subscribe(
+        (response) => {
+          console.log(this.form.value);
+          console.log('Registration successful: ', response);
+          this.RegDialogRef.close(this.form);
+        },
+        (error) => {
+          console.error('registration failed: ', error);
+        }
+      );
     }
   }
 }

@@ -15,7 +15,7 @@ export class ScoreboardComponent implements OnChanges, OnInit {
   @Input() fish: string = '';
   @Input() choice: string = '';
 
-  playerName = 'Trainee';
+  playerName = '';
   totalScore: number = 0;
   totalCasts: number = 0;
   lastCatch = '';
@@ -26,6 +26,7 @@ export class ScoreboardComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     this.totalCasts = 0;
     this.lastCatch = 'No catches yet';
+    this.playerName = this.gameService.playerName;
   }
 
   ngOnChanges() {

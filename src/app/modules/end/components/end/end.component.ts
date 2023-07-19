@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamedataService } from 'src/app/core/services/gameservice/gamedata.service';
 import { Router } from '@angular/router';
+import { BackendService } from 'src/app/core/services/backendService/backend.service';
 
 @Component({
   selector: 'app-end',
@@ -20,7 +21,11 @@ export class EndComponent implements OnInit {
   SmallMulloway = 0;
   Snapper = 0;
 
-  constructor(private gameService: GamedataService, private router: Router) {}
+  constructor(
+    private gameService: GamedataService,
+    private router: Router,
+    private backendService: BackendService
+  ) {}
 
   ngOnInit() {
     this.gameService.retrieveGameData().subscribe((data) => {
@@ -63,10 +68,38 @@ export class EndComponent implements OnInit {
   }
 
   playAgain() {
-    this.router.navigate(['/main-page']);
+    const name = this.playerName;
+    const score = this.finalScore;
+    const casts = this.totalCasts;
+    const fishArray = this.keptFish;
+    const result = { name, score, casts, fishArray };
+
+    this.backendService.saveResults(result).subscribe(
+      (response) => {
+        console.log('Game saved: ', response);
+        this.router.navigate(['/main-page']);
+      },
+      (error) => {
+        console.error('Save failed: ', error);
+      }
+    );
   }
 
   endGame() {
-    this.router.navigate(['/login-page']);
+    const name = this.playerName;
+    const score = this.finalScore;
+    const casts = this.totalCasts;
+    const fishArray = this.keptFish;
+    const result = { name, score, casts, fishArray };
+
+    this.backendService.saveResults(result).subscribe(
+      (response) => {
+        console.log('Game saved: ', response);
+        this.router.navigate(['/login-page']);
+      },
+      (error) => {
+        console.error('Save failed: ', error);
+      }
+    );
   }
 }
