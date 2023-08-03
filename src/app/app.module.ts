@@ -11,6 +11,7 @@ import { GamedataService } from './core/services/gameservice/gamedata.service';
 import { LoginModule } from './modules/login/login.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FishDataService } from './core/services/fishService/fish-data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
     GamedataService,
+    FishDataService,
   ],
   bootstrap: [AppComponent],
 })

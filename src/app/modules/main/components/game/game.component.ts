@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FishDataService } from 'src/app/core/services/fishService/fish-data.service';
 
 @Component({
   selector: 'app-game',
@@ -22,12 +22,17 @@ export class GameComponent implements OnInit {
   score = 0;
   castCount = 0;
   fish = '';
+  imgURL = '../../../../../assets/images/';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private router: Router,
+    private fishDataService: FishDataService
+  ) {}
 
   //CSV reader method is called upon page load
   ngOnInit() {
-    this.retrieveCSVData();
+    this.fishArray = this.fishDataService.getFishArray();
+    console.log(this.fishArray);
   }
 
   //Creates output event emitter that outputs results from each round
@@ -39,8 +44,8 @@ export class GameComponent implements OnInit {
 
   //Method that runs bulk of the game once cast button has been clicked
   playCast() {
-    this.randomNumber = Math.floor(Math.random() * 6); //Generates random number between 0-6
-    this.fishImg = this.fishArray[this.randomNumber].img; //Changes picture on page to caught fish
+    this.randomNumber = this.getRandomNumber(); //Retieves number that is generated in service
+    this.fishImg = this.imgURL + this.fishArray[this.randomNumber].img; //Changes picture on page to caught fish
     if (this.fishArray[this.randomNumber].name === 'Lost Bait') {
       //Displays message with name of caught fish
       this.fishMsg = 'You lost your bait!';
@@ -62,48 +67,28 @@ export class GameComponent implements OnInit {
     setTimeout(() => {
       //Resets page so user can play again
       this.fishMsg = 'Click the rod to cast again!';
-      this.fishImg = '../../../../../assets/images/Fishing-Rod.png';
+      this.fishImg = this.imgURL + 'Fishing-Rod.png';
       this.castDisabled = false;
       this.showChoice = false;
       this.choiceMsg = 'Would you like to release or keep the fish?';
       this.selectDisabled = false;
 
+      //Calls method to send results at the end of the round
       this.sendResults(this.score, this.fish, this.playerChoice);
     }, 1750);
   }
 
+  //Generates random number between 0-5
+  getRandomNumber(): number {
+    return Math.floor(Math.random() * 6);
+  }
+
+  //Method that emits the results of the round to the scoreboard component
   sendResults(score: number, fish: string, choice: string) {
     this.roundResults.emit({ score: score, fish: fish, choice: choice });
   }
 
-  //Method used to read in csv file and convert contents to an array of fish that can be used within the game
-  retrieveCSVData() {
-    this.http
-      .get('./assets/Fishing.csv', { responseType: 'text' })
-      .subscribe((data) => {
-        const rows = data.split('\n');
-        const headers = rows[0].split(',');
-
-        this.fishArray = rows.slice(1).map((row) => {
-          const values = row.split(',');
-          const obj: any = {};
-
-          for (let i = 0; i < headers.length; i++) {
-            obj[headers[i]] = values[i];
-          }
-
-          return {
-            name: obj['Name'],
-            keeper: obj['Keeper'] === 'Y' ? 'yes' : 'no',
-            fish: obj['Fish'] === 'Y' ? 'yes' : 'no',
-            kept: parseInt(obj['Kept'], 10),
-            released: parseInt(obj['Released'], 10),
-            img: `../../../../../../assets/images/${values[5]}`,
-          };
-        });
-      });
-  }
-
+  // Method used to navigate to the end game page once the user clicks the button
   close() {
     this.router.navigate(['/end-page']);
   }
