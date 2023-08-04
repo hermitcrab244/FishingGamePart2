@@ -1,6 +1,6 @@
 # ICTPRG443 - Apply intermediate programming skills in different languages 2022
 
-Created by Michael Hermann
+Created by Michael Hermann.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.4.
 
 ## Contents
