@@ -51,7 +51,7 @@ Run `ng test` in console to execute the unit tests.
 10. Click bucket to view count of kept fish
 11. Click 'X' button to end the game
 12. View game results on end game screen
-13. Select 'PLay Again' to play another round
+13. Select 'Play Again' to play another round
 14. Select 'End Game' to end the session and be navigated back to the login page
 
 ## Further help
